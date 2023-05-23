@@ -9,36 +9,36 @@
 
 function decodeUplink(input) {
     let bytes = input.bytes;
-  let decoded = {};
+    let decoded = {};
 
-  for (let i = 0; i < bytes.length;) {
-      let channel_id = bytes[i++];
-      let channel_type = bytes[i++];
+    for (let i = 0; i < bytes.length;) {
+        let channel_id = bytes[i++];
+        let channel_type = bytes[i++];
 
-      // BATTERY
-      if (channel_id === 0x01 && channel_type === 0x75) {
-          decoded.battery = bytes[i];
-          i += 1;
-      }
-      // TEMPERATURE
-      else if (channel_id === 0x03 && channel_type === 0x67) {
-          // ℃
-          decoded.temperature = readInt16LE(bytes.slice(i, i + 2)) / 10;
-          i += 2;
+        // BATTERY
+        if (channel_id === 0x01 && channel_type === 0x75) {
+            decoded.battery = bytes[i];
+            i += 1;
+        }
+        // TEMPERATURE
+        else if (channel_id === 0x03 && channel_type === 0x67) {
+            // ℃
+            decoded.temperature = readInt16LE(bytes.slice(i, i + 2)) / 10;
+            i += 2;
 
-          // ℉
-          // decoded.temperature = readInt16LE(bytes.slice(i, i + 2)) / 10 * 1.8 + 32;
-          // i +=2;
-      }
-      // HUMIDITY
-      else if (channel_id === 0x04 && channel_type === 0x68) {
-          decoded.humidity = bytes[i] / 2;
-          i += 1;
-      } else {
-          break;
-      }
-  }
-  return {data: decoded};
+            // ℉
+            // decoded.temperature = readInt16LE(bytes.slice(i, i + 2)) / 10 * 1.8 + 32;
+            // i +=2;
+        }
+        // HUMIDITY
+        else if (channel_id === 0x04 && channel_type === 0x68) {
+            decoded.humidity = bytes[i] / 2;
+            i += 1;
+        } else {
+            break;
+        }
+    }
+    return {data: decoded};
 }
 
 /*******************************************
@@ -63,6 +63,9 @@ function readInt16LE(bytes) {
 // Output must be an object with the following fields:
 // - bytes = Byte array containing the downlink payload.
 
+/*****************************************
+* downlink function not set or tested
+******************************************/
 function encodeDownlink(input) {
   let port = input.fPort;
   let downlink = input.bytes;
