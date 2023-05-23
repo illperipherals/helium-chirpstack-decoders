@@ -26,7 +26,7 @@ function decodeUplink(input) {
 }
 
 /*****************************************
-* to confirm downlink function not tested
+* downlink function not set or tested
 ******************************************/
 function encodeDownlink(input) {
   	let port = input.fPort;
