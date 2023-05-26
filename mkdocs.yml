@@ -1,0 +1,8 @@
+site_name: My Docs
+
+site_name: Helium Chirpstack Decoders
+theme:
+  name: readthedocs
+markdown_extensions:
+  - footnotes
+  - tables
